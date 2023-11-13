@@ -1,0 +1,29 @@
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Connecting the Arduino</mat-panel-title>
+        <mat-panel-description>Connect Arduino to the computer, and wait for connection status to change</mat-panel-description> <!--Add summary of -->
+      </mat-expansion-panel-header>
+      <p>Connect Arduino to the computer, and wait for connection status to change. In case the connection state does not change, you can verify that the correct COM port was detected in the Settings tab.</p>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Visualising the data</mat-panel-title>
+          <mat-panel-description>Navigate to the Dashboard tab</mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Navigate to the Dashboard tab. There you can select which sensor you can view.</p>
+        <p>Due to the limitations of the Hardware, only one sensor can be viewed at a time.</p>
+        <p>Additional info can be seen in that tab, like the sensor id and time of the last measured data. This is only for development purposes only!</p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Settings</mat-panel-title>
+          <mat-panel-description>This tab is intended for chaging settings</mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Navigate to the Settings tab. You will be able to manually select a COM Port in case the automatic detection is not working.</p>
+        <p>You can change export setting of the data: CSV, JSON, or Excel.</p>
+      </mat-expansion-panel>
+
+  </mat-accordion>

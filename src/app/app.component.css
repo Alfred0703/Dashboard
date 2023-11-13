@@ -1,0 +1,11 @@
+.common-button {
+    width: 100px; /* You can adjust the width to your desired size */
+    cursor: pointer;
+}
+.common-button:last-child {
+    margin-left: 5px;
+}
+.status {
+    position: fixed;
+    margin-left: 900px;
+}
