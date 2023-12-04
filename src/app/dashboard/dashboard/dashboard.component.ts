@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { of, map, catchError } from 'rxjs';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 		},
 		data: [{
 		  type: "line",
-		  dataPoints: [] as {x: number; y:number} []
+		  dataPoints: [] as {x: number; y: number} []
 		}]
 	  };
 	

@@ -19,13 +19,15 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartsyncComponent } from './dashboard/sync/chartsync/chartsync.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     TutorialComponent,
-    SettingsComponent
+    SettingsComponent,
+    ChartsyncComponent
   ],
   imports: [
     BrowserModule,
