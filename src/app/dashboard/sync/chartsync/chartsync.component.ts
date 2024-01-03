@@ -36,7 +36,28 @@ export class ChartsyncComponent implements OnInit{
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    //this.syncCharts(e: any);
+    for (let i = 0; i < 5; i++) {
+      const chart = new CanvasJS.Chart(`chartContainer${i}`, {
+        zoomEnabled: true,
+        exportEnabled: true,
+        theme: 'light2',
+        animationEnabled: true,
+        axisX: {
+          title: 'Date and Time'
+        },
+        axisY: {
+          title: 'Value'
+        },
+        title: { // Add a title property for the axis
+          text: 'Chart Title'
+        },
+        data: [] as any[],
+      });
+
+      // Render the chart and add it to the charts array
+      chart.render();
+      this.charts.push(chart);
+    }
   }
 
   onFileSelected(event: any): void {
@@ -86,6 +107,18 @@ export class ChartsyncComponent implements OnInit{
         // Update common timestamp data
         this.chartData = [...timestampDps];
 
+        // Synchronize charts by updating their shared data series
+        const sharedDataSeries: CanvasJS.ChartDataSeries[] = chartNames.map((name: any, index: number) => {
+          const randomColor = this.getRandomColor();
+          return {
+            type: 'line',
+            showInLegend: true,
+            name: name,
+            color: randomColor,
+            dataPoints: chartDps.map(d => ({ x: d.x, y: d[`y${index + 1}`], color: randomColor }))
+          };
+        });
+
         // Ensure chartOptions and its nested properties are defined
         if (!this.chartOptions.data) {
           this.chartOptions.data = [];
@@ -101,6 +134,12 @@ export class ChartsyncComponent implements OnInit{
             color: randomColor,
             dataPoints: chartDps.map((d) => ({ x: d.x, y: d[`y${index + 1}`], color: randomColor }))
           };
+        });
+
+        // Update each chart with the shared data series
+        this.charts.forEach((chart, index) => {
+          chart.options.data = [sharedDataSeries[index]];
+          chart.render();
         });
 
         this.cdr.detectChanges();
@@ -129,22 +168,5 @@ export class ChartsyncComponent implements OnInit{
     return Object.assign({}, baseOptions, additionalOptions);
   }
 
-  // syncCharts = (event: MouseEvent) => {
-  //   if (this.charts.length > 1) {
-  //     const baseChart = this.charts[0]; // Assuming the first chart as the base for crosshair synchronization
-  //     const baseAxisX = baseChart.axisX[0];
-  //     const rect = (event.target as HTMLCanvasElement).getBoundingClientRect();
-  //     const mouseX = event.clientX - rect.left;
-  
-  //     this.charts.slice(1).forEach(chart => {
-  //       const baseXValue = baseAxisX.pointToPixel(mouseX);
-  //       const index = baseAxisX.data.indexOf(baseXValue);
-  
-  //       if (index !== -1) {
-  //         chart.axisX[0].set('value', baseAxisX.data[index]);
-  //       }
-  //     });
-  //   }
-  // };
 
 }
